@@ -13,7 +13,11 @@
         if array[j] - array [i]  is > temp, temp = the difference.
 
         for the map version. if the value of array[i]- key, then temp = array[i] - map key. unlike two sum, i want to
-        return the value of max profit, not the buy and sell days
+        return the value of max profit, not the buy and sell days. I'll nneed to say if map conntains a key that
+        is less than arrray[i] - maxProfit such that if max profit was 0 to start, first day selling for 5 bucks,
+        2nd day selling for 6 bucks we need to say "is there a key that is less than 6-0?" Yes. 5 is already a key
+        added to the map. maxProfit becomes 1 dollar. first int in the array will have no comparision and must be
+        added outside the loop. maxProfit defined in the loop
 
  */
 
