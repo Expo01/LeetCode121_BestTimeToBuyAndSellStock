@@ -12,35 +12,57 @@
         a temporary variable that will be modified with an if conditional. in the nested for loop, start temp = 0. then
         if array[j] - array [i]  is > temp, temp = the difference.
 
-        for the map version. if the value of array[i]- key, then temp = array[i] - map key. unlike two sum, i want to
-        return the value of max profit, not the buy and sell days. I'll nneed to say if map conntains a key that
-        is less than arrray[i] - maxProfit such that if max profit was 0 to start, first day selling for 5 bucks,
-        2nd day selling for 6 bucks we need to say "is there a key that is less than 6-0?" Yes. 5 is already a key
-        added to the map. maxProfit becomes 1 dollar. first int in the array will have no comparision and must be
-        added outside the loop. maxProfit defined in the loop
-
+     //map not appropriate here. map only allows for exact values or keys to be searched. No > < such that if i were
+     // so search a map for a range of values that could result in higher profit, i can't do it
+        y-x > z. we need to make this true so....
+        y-z > x
  */
 
 
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-
+        int[] priceArray = {5, 50, 4, 7};
+        System.out.println(new Solution().maxProfit(priceArray));
     }
 }
 
-// nested loop O(n^2) solution
+//to avoid nested loop, need 3 variables. one to save prior low, one saves max profit potential and one variable is current
+// to compare to max profit
 class Solution {
     public int maxProfit(int[] prices) {
         int maxProfit = 0;
-        for(int i = 0; i < prices.length; i++){
-            for(int j = i+1; j < prices.length; j++){
-                if ((prices[j] - prices[i]) > maxProfit){
-                    maxProfit = prices[j] - prices[i];
-                }
+        int lowestValueSoFar = Integer.MAX_VALUE;
+        int profitIfSoldToday = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < lowestValueSoFar){
+                lowestValueSoFar = prices[i];
             }
+
+            profitIfSoldToday = prices[i] - lowestValueSoFar;
+
+            if (profitIfSoldToday > maxProfit){
+                maxProfit = profitIfSoldToday;
+            }
+
         }
         return maxProfit;
     }
 }
+
+// nested loop O(n^2) solution
+//class Solution {
+//    public int maxProfit(int[] prices) {
+//        int maxProfit = 0;
+//        for(int i = 0; i < prices.length; i++){
+//            for(int j = i+1; j < prices.length; j++){
+//                if ((prices[j] - prices[i]) > maxProfit){
+//                    maxProfit = prices[j] - prices[i];
+//                }
+//            }
+//        }
+//        return maxProfit;
+//    }
+//}
